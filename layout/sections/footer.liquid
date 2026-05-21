@@ -1,0 +1,54 @@
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <a href="/" class="footer-logo">{{ shop.name | upcase }}</a>
+      <p class="footer-desc">{{ section.settings.description }}</p>
+    </div>
+    <div class="footer-col">
+      <h4>Shop</h4>
+      <ul>
+        <li><a href="/collections/new">New In</a></li>
+        <li><a href="/collections/women">Women</a></li>
+        <li><a href="/collections/men">Men</a></li>
+        <li><a href="/collections/accessories">Accessories</a></li>
+        <li><a href="/collections/sale">Sale</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Help</h4>
+      <ul>
+        <li><a href="/policies/shipping-policy">Shipping</a></li>
+        <li><a href="/policies/refund-policy">Returns</a></li>
+        <li><a href="/pages/size-guide">Size Guide</a></li>
+        <li><a href="/pages/contact">Contact Us</a></li>
+        <li><a href="/pages/faq">FAQs</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <ul>
+        <li><a href="/pages/about">Our Story</a></li>
+        <li><a href="/pages/sustainability">Sustainability</a></li>
+        <li><a href="/pages/careers">Careers</a></li>
+        <li><a href="/pages/press">Press</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p class="footer-copy">© {{ 'now' | date: '%Y' }} {{ shop.name }}. All rights reserved.</p>
+    <div class="footer-payment">
+      {% for type in shop.enabled_payment_types %}
+        {{ type | payment_type_svg_tag: class: 'payment-icon' }}
+      {% endfor %}
+    </div>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Footer",
+  "settings": [
+    { "type": "textarea", "id": "description", "label": "Brand Description", "default": "Timeless clothing for the considered wardrobe. Designed in London, made in Europe." }
+  ]
+}
+{% endschema %}
