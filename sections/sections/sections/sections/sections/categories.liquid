@@ -1,0 +1,50 @@
+<section class="categories-section">
+  <div class="section-header">
+    <h2 class="section-title">{{ section.settings.title }}</h2>
+  </div>
+  <div class="cat-grid">
+    {% for block in section.blocks %}
+      <a href="{{ block.settings.link }}" class="cat-item" {{ block.shopify_attributes }}>
+        {% if block.settings.image %}
+          {{ block.settings.image | image_url: width: 800 | image_tag: loading: 'lazy', class: 'cat-bg-img' }}
+        {% else %}
+          <div class="cat-bg"><span class="cat-bg-text">{{ block.settings.name }}</span></div>
+        {% endif %}
+        <div class="cat-content">
+          <div class="cat-label">Explore</div>
+          <div class="cat-name">{{ block.settings.name }}</div>
+          <div class="cat-count">{{ block.settings.count }}</div>
+        </div>
+      </a>
+    {% endfor %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Categories",
+  "settings": [
+    { "type": "text", "id": "title", "label": "Title", "default": "Shop by Category" }
+  ],
+  "blocks": [
+    {
+      "type": "category",
+      "name": "Category",
+      "settings": [
+        { "type": "text", "id": "name", "label": "Name", "default": "Women's Edit" },
+        { "type": "text", "id": "count", "label": "Count", "default": "142 pieces" },
+        { "type": "url", "id": "link", "label": "Link" },
+        { "type": "image_picker", "id": "image", "label": "Image" }
+      ]
+    }
+  ],
+  "presets": [{
+    "name": "Categories",
+    "blocks": [
+      { "type": "category", "settings": { "name": "Women's Edit", "count": "142 pieces" } },
+      { "type": "category", "settings": { "name": "Men's Edit", "count": "98 pieces" } },
+      { "type": "category", "settings": { "name": "Accessories", "count": "56 pieces" } }
+    ]
+  }]
+}
+{% endschema %}
