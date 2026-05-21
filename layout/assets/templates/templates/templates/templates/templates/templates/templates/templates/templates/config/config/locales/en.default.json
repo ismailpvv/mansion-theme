@@ -1,0 +1,23 @@
+{
+  "general": {
+    "meta": {
+      "tags": "Tagged \"{{ tags }}\"",
+      "search": "Search"
+    }
+  },
+  "products": {
+    "product": {
+      "add_to_cart": "Add to Cart",
+      "sold_out": "Sold Out",
+      "unavailable": "Unavailable"
+    }
+  },
+  "cart": {
+    "general": {
+      "title": "Your Bag",
+      "empty": "Your bag is empty.",
+      "checkout": "Proceed to Checkout",
+      "continue_shopping": "Continue Shopping"
+    }
+  }
+}
