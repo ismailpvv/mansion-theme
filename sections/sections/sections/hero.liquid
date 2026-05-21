@@ -1,0 +1,42 @@
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-tag">{{ section.settings.tag }}</div>
+    <h1 class="hero-title">{{ section.settings.title }}</h1>
+    <p class="hero-sub">{{ section.settings.subtitle }}</p>
+    <div class="hero-btns">
+      <a href="{{ section.settings.primary_btn_link }}" class="btn-primary">{{ section.settings.primary_btn_text }}</a>
+      <a href="{{ section.settings.secondary_btn_link }}" class="btn-secondary">{{ section.settings.secondary_btn_text }}</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    {% if section.settings.hero_image %}
+      {{ section.settings.hero_image | image_url: width: 1200 | image_tag: loading: 'eager', class: 'hero-img' }}
+    {% else %}
+      <div class="hero-placeholder">
+        <span class="hero-placeholder-text">{{ shop.name | upcase }}</span>
+        <div class="hero-badge">
+          <div class="hero-badge-label">Featured</div>
+          <div class="hero-badge-val">{{ section.settings.badge_text }}</div>
+        </div>
+      </div>
+    {% endif %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Hero",
+  "settings": [
+    { "type": "text", "id": "tag", "label": "Tag line", "default": "New Collection — SS 2026" },
+    { "type": "textarea", "id": "title", "label": "Title", "default": "Dressed in Silence & Light" },
+    { "type": "textarea", "id": "subtitle", "label": "Subtitle", "default": "Timeless silhouettes, elevated fabrics. A wardrobe built for those who let quality speak first." },
+    { "type": "image_picker", "id": "hero_image", "label": "Hero Image" },
+    { "type": "text", "id": "primary_btn_text", "label": "Primary Button Text", "default": "Shop Now" },
+    { "type": "url", "id": "primary_btn_link", "label": "Primary Button Link" },
+    { "type": "text", "id": "secondary_btn_text", "label": "Secondary Button Text", "default": "Lookbook" },
+    { "type": "url", "id": "secondary_btn_link", "label": "Secondary Button Link" },
+    { "type": "text", "id": "badge_text", "label": "Badge Text", "default": "The Atelier Edit" }
+  ],
+  "presets": [{ "name": "Hero" }]
+}
+{% endschema %}
