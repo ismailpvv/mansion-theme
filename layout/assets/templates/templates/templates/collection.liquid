@@ -1,0 +1,60 @@
+<div class="collection-page">
+  <div class="collection-header">
+    <div class="collection-tag">Collection</div>
+    <h1 class="collection-title">{{ collection.title }}</h1>
+    {% if collection.description != blank %}
+      <p class="collection-desc">{{ collection.description }}</p>
+    {% endif %}
+  </div>
+
+  <div class="collection-toolbar">
+    <span class="collection-count">{{ collection.products_count }} pieces</span>
+    <div class="sort-by">
+      <select name="sort_by" id="sort-by" onchange="location.search = '?sort_by=' + this.value">
+        <option value="manual" {% if collection.sort_by == 'manual' %}selected{% endif %}>Featured</option>
+        <option value="price-ascending" {% if collection.sort_by == 'price-ascending' %}selected{% endif %}>Price: Low to High</option>
+        <option value="price-descending" {% if collection.sort_by == 'price-descending' %}selected{% endif %}>Price: High to Low</option>
+        <option value="created-descending" {% if collection.sort_by == 'created-descending' %}selected{% endif %}>Newest</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="products-grid">
+    {% for product in collection.products %}
+      <div class="product-card">
+        <a href="{{ product.url }}" class="product-image-wrap">
+          <div class="product-image">
+            {% if product.featured_image %}
+              {{ product.featured_image | image_url: width: 600 | image_tag: loading: 'lazy', class: 'product-img' }}
+            {% else %}
+              <div class="product-img-placeholder"></div>
+            {% endif %}
+            {% if product.compare_at_price > product.price %}
+              <span class="product-tag product-tag--sale">Sale</span>
+            {% endif %}
+            <div class="product-actions">
+              <button class="add-btn" data-product-id="{{ product.variants.first.id }}">Add to Cart</button>
+              <button class="wishlist-btn" aria-label="Wishlist">♡</button>
+            </div>
+          </div>
+        </a>
+        <div class="product-cat">{{ product.type }}</div>
+        <a href="{{ product.url }}" class="product-name">{{ product.title }}</a>
+        <div class="product-price">
+          {% if product.compare_at_price > product.price %}
+            <s>{{ product.compare_at_price | money }}</s>
+          {% endif %}
+          {{ product.price | money }}
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+
+  {% if paginate.pages > 1 %}
+    {% paginate collection.products by 12 %}
+      <div class="pagination">
+        {{ paginate | default_pagination }}
+      </div>
+    {% endpaginate %}
+  {% endif %}
+</div>
