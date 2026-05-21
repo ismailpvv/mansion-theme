@@ -1,0 +1,42 @@
+{
+  "sections": {
+    "hero": {
+      "type": "hero",
+      "settings": {
+        "tag": "New Collection — SS 2026",
+        "title": "Dressed in Silence & Light",
+        "subtitle": "Timeless silhouettes, elevated fabrics. A wardrobe built for those who let quality speak first.",
+        "primary_btn_text": "Shop Now",
+        "secondary_btn_text": "Lookbook",
+        "badge_text": "The Atelier Edit"
+      }
+    },
+    "featured_products": {
+      "type": "featured-products",
+      "settings": {
+        "title": "New Arrivals",
+        "products_count": 4
+      }
+    },
+    "categories": {
+      "type": "categories",
+      "settings": { "title": "Shop by Category" },
+      "blocks": {
+        "cat1": { "type": "category", "settings": { "name": "Women's Edit", "count": "142 pieces" } },
+        "cat2": { "type": "category", "settings": { "name": "Men's Edit", "count": "98 pieces" } },
+        "cat3": { "type": "category", "settings": { "name": "Accessories", "count": "56 pieces" } }
+      },
+      "block_order": ["cat1", "cat2", "cat3"]
+    },
+    "brand_banner": {
+      "type": "brand-banner",
+      "settings": {
+        "tag": "Our Story",
+        "title": "Crafted with intention. Worn with purpose.",
+        "description": "Every piece in our collection is designed to outlast trends. We work with artisan suppliers across Europe to source only the finest natural fibres — linen, wool, silk, cashmere.",
+        "btn_text": "Our Story"
+      },
+      "blocks": {
+        "stat1": { "type": "stat", "settings": { "number": "12+", "label": "Years crafting" } },
+        "stat2": { "type": "stat", "settings": { "number": "98%", "label": "Natural fibres" } },
+        "stat3": { "type": "stat", "settings": { "number": "42K", "label": "Happy customer
