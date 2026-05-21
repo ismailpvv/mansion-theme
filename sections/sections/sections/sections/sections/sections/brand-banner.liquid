@@ -1,0 +1,55 @@
+<section class="brand-banner">
+  <div class="banner-text">
+    <div class="banner-tag">{{ section.settings.tag }}</div>
+    <h2 class="banner-title">{{ section.settings.title }}</h2>
+    <p class="banner-desc">{{ section.settings.description }}</p>
+    <div class="banner-stats">
+      {% for block in section.blocks %}
+        <div class="stat" {{ block.shopify_attributes }}>
+          <div class="stat-num">{{ block.settings.number }}</div>
+          <div class="stat-label">{{ block.settings.label }}</div>
+        </div>
+      {% endfor %}
+    </div>
+    <a href="{{ section.settings.btn_link }}" class="btn-primary" style="margin-top:2rem">{{ section.settings.btn_text }}</a>
+  </div>
+  <div class="banner-visual">
+    {% if section.settings.image %}
+      {{ section.settings.image | image_url: width: 800 | image_tag: loading: 'lazy' }}
+    {% else %}
+      <span class="banner-visual-text">Atelier</span>
+    {% endif %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Brand Banner",
+  "settings": [
+    { "type": "text", "id": "tag", "label": "Tag", "default": "Our Story" },
+    { "type": "textarea", "id": "title", "label": "Title", "default": "Crafted with intention. Worn with purpose." },
+    { "type": "textarea", "id": "description", "label": "Description", "default": "Every piece in our collection is designed to outlast trends." },
+    { "type": "image_picker", "id": "image", "label": "Image" },
+    { "type": "text", "id": "btn_text", "label": "Button Text", "default": "Our Story" },
+    { "type": "url", "id": "btn_link", "label": "Button Link" }
+  ],
+  "blocks": [
+    {
+      "type": "stat",
+      "name": "Stat",
+      "settings": [
+        { "type": "text", "id": "number", "label": "Number", "default": "12+" },
+        { "type": "text", "id": "label", "label": "Label", "default": "Years crafting" }
+      ]
+    }
+  ],
+  "presets": [{
+    "name": "Brand Banner",
+    "blocks": [
+      { "type": "stat", "settings": { "number": "12+", "label": "Years crafting" } },
+      { "type": "stat", "settings": { "number": "98%", "label": "Natural fibres" } },
+      { "type": "stat", "settings": { "number": "42K", "label": "Happy customers" } }
+    ]
+  }]
+}
+{% e
