@@ -1,0 +1,33 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "MAISON",
+    "theme_version": "1.0.0",
+    "theme_author": "MAISON Studio",
+    "theme_documentation_url": "",
+    "theme_support_url": ""
+  },
+  {
+    "name": "Colors",
+    "settings": [
+      { "type": "color", "id": "color_bg", "label": "Background", "default": "#0e0e0e" },
+      { "type": "color", "id": "color_text", "label": "Text", "default": "#f0ebe3" },
+      { "type": "color", "id": "color_accent", "label": "Accent (Gold)", "default": "#c9a96e" }
+    ]
+  },
+  {
+    "name": "Typography",
+    "settings": [
+      { "type": "font_picker", "id": "heading_font", "label": "Heading Font", "default": "playfair_display_n4" },
+      { "type": "font_picker", "id": "body_font", "label": "Body Font", "default": "jost_n4" }
+    ]
+  },
+  {
+    "name": "Social Media",
+    "settings": [
+      { "type": "text", "id": "instagram", "label": "Instagram URL" },
+      { "type": "text", "id": "tiktok", "label": "TikTok URL" },
+      { "type": "text", "id": "pinterest", "label": "Pinterest URL" }
+    ]
+  }
+]
