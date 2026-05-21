@@ -1,0 +1,52 @@
+<section class="products-section">
+  <div class="section-header">
+    <h2 class="section-title">{{ section.settings.title }}</h2>
+    <a href="{{ section.settings.view_all_link }}" class="section-link">View All →</a>
+  </div>
+  <div class="products-grid">
+    {% assign collection = collections[section.settings.collection] %}
+    {% for product in collection.products limit: section.settings.products_count %}
+      <div class="product-card">
+        <a href="{{ product.url }}" class="product-image-wrap">
+          <div class="product-image">
+            {% if product.featured_image %}
+              {{ product.featured_image | image_url: width: 600 | image_tag: loading: 'lazy', class: 'product-img' }}
+            {% else %}
+              <div class="product-img-placeholder"><span>{{ product.title | truncate: 2, '' }}</span></div>
+            {% endif %}
+            {% if product.compare_at_price > product.price %}
+              <span class="product-tag product-tag--sale">Sale</span>
+            {% elsif product.created_at > 'now' | date: '%s' | minus: 604800 %}
+              <span class="product-tag">New</span>
+            {% endif %}
+            <div class="product-actions">
+              <button class="add-btn" data-product-id="{{ product.variants.first.id }}">Add to Cart</button>
+              <button class="wishlist-btn" aria-label="Wishlist">♡</button>
+            </div>
+          </div>
+        </a>
+        <div class="product-cat">{{ product.type }}</div>
+        <a href="{{ product.url }}" class="product-name">{{ product.title }}</a>
+        <div class="product-price">
+          {% if product.compare_at_price > product.price %}
+            <s>{{ product.compare_at_price | money }}</s>
+          {% endif %}
+          {{ product.price | money }}
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Featured Products",
+  "settings": [
+    { "type": "text", "id": "title", "label": "Section Title", "default": "New Arrivals" },
+    { "type": "collection", "id": "collection", "label": "Collection" },
+    { "type": "range", "id": "products_count", "min": 2, "max": 8, "step": 1, "label": "Products to show", "default": 4 },
+    { "type": "url", "id": "view_all_link", "label": "View All Link" }
+  ],
+  "presets": [{ "name": "Featured Products" }]
+}
+{% endschema %}
