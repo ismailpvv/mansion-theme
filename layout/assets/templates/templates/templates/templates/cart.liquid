@@ -1,0 +1,48 @@
+<div class="cart-page">
+  <div class="cart-header">
+    <div class="cart-tag">Your Bag</div>
+    <h1 class="cart-title">{{ cart.item_count }} {% if cart.item_count == 1 %}Item{% else %}Items{% endif %}</h1>
+  </div>
+  {% if cart.item_count > 0 %}
+    <form action="/cart" method="post" class="cart-form">
+      <div class="cart-items">
+        {% for item in cart.items %}
+          <div class="cart-item">
+            <a href="{{ item.url }}" class="cart-item-image">
+              {% if item.image %}
+                {{ item.image | image_url: width: 200 | image_tag: loading: 'lazy' }}
+              {% else %}
+                <div class="cart-img-placeholder"></div>
+              {% endif %}
+            </a>
+            <div class="cart-item-details">
+              <a href="{{ item.url }}" class="cart-item-title">{{ item.title }}</a>
+              {% unless item.variant.title == 'Default Title' %}
+                <div class="cart-item-variant">{{ item.variant.title }}</div>
+              {% endunless %}
+              <div class="cart-item-price">{{ item.final_price | money }}</div>
+            </div>
+            <div class="cart-item-qty">
+              <input type="number" name="updates[]" value="{{ item.quantity }}" min="0" class="qty-input">
+            </div>
+            <a href="/cart/change?line={{ forloop.index }}&quantity=0" class="cart-item-remove">Remove</a>
+          </div>
+        {% endfor %}
+      </div>
+      <div class="cart-footer">
+        <div class="cart-subtotal">
+          <span>Subtotal</span>
+          <span>{{ cart.total_price | money }}</span>
+        </div>
+        <p class="cart-shipping-note">Shipping and taxes calculated at checkout</p>
+        <button type="submit" name="checkout" class="btn-primary btn-full">Proceed to Checkout</button>
+        <a href="/collections/all" class="btn-secondary btn-full" style="margin-top:1rem;display:block;text-align:center">Continue Shopping</a>
+      </div>
+    </form>
+  {% else %}
+    <div class="cart-empty">
+      <p>Your bag is empty.</p>
+      <a href="/collections/all" class="btn-primary">Shop Now</a>
+    </div>
+  {% endif %}
+</div>
