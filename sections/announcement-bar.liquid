@@ -1,0 +1,22 @@
+<div class="announcement-bar">
+  <div class="marquee-track">
+    {% for i in (1..2) %}
+      <span class="marquee-item"><span class="marquee-dot"></span>{{ section.settings.text_1 }}</span>
+      <span class="marquee-item"><span class="marquee-dot"></span>{{ section.settings.text_2 }}</span>
+      <span class="marquee-item"><span class="marquee-dot"></span>{{ section.settings.text_3 }}</span>
+      <span class="marquee-item"><span class="marquee-dot"></span>{{ section.settings.text_4 }}</span>
+    {% endfor %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Announcement Bar",
+  "settings": [
+    { "type": "text", "id": "text_1", "label": "Message 1", "default": "Free shipping over £150" },
+    { "type": "text", "id": "text_2", "label": "Message 2", "default": "New arrivals every Thursday" },
+    { "type": "text", "id": "text_3", "label": "Message 3", "default": "Ethically sourced fabrics" },
+    { "type": "text", "id": "text_4", "label": "Message 4", "default": "30-day free returns" }
+  ]
+}
+{% endschema %}
