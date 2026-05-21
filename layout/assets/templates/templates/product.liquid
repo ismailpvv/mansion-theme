@@ -1,0 +1,60 @@
+{% assign product = product %}
+<div class="product-page">
+  <div class="product-page-gallery">
+    <div class="product-main-image">
+      {% if product.featured_image %}
+        {{ product.featured_image | image_url: width: 900 | image_tag: loading: 'eager', id: 'main-product-image', class: 'main-img' }}
+      {% else %}
+        <div class="product-img-placeholder large"></div>
+      {% endif %}
+    </div>
+    {% if product.images.size > 1 %}
+      <div class="product-thumbnails">
+        {% for image in product.images %}
+          <div class="thumb {% if forloop.first %}active{% endif %}" data-src="{{ image | image_url: width: 900 }}">
+            {{ image | image_url: width: 200 | image_tag: loading: 'lazy' }}
+          </div>
+        {% endfor %}
+      </div>
+    {% endif %}
+  </div>
+
+  <div class="product-page-info">
+    <div class="product-page-cat">{{ product.type }}</div>
+    <h1 class="product-page-title">{{ product.title }}</h1>
+    <div class="product-page-price">
+      {% if product.compare_at_price > product.price %}
+        <s>{{ product.compare_at_price | money }}</s>
+      {% endif %}
+      <span>{{ product.price | money }}</span>
+    </div>
+
+    {% if product.variants.size > 1 %}
+      <div class="product-options">
+        {% for option in product.options_with_values %}
+          <div class="option-group">
+            <label class="option-label">{{ option.name }}</label>
+            <div class="option-values">
+              {% for value in option.values %}
+                <button class="option-btn" data-option="{{ option.position }}" data-value="{{ value }}">{{ value }}</button>
+              {% endfor %}
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    {% endif %}
+
+    <form action="/cart/add" method="post" enctype="multipart/form-data" class="product-form">
+      <input type="hidden" name="id" id="variant-id" value="{{ product.variants.first.id }}">
+      <button type="submit" class="btn-primary btn-full">Add to Cart</button>
+    </form>
+
+    <div class="product-page-desc">{{ product.description }}</div>
+
+    <div class="product-details">
+      <div class="detail-row"><span>Material</span><span>{{ product.metafields.custom.material | default: 'Natural Fibres' }}</span></div>
+      <div class="detail-row"><span>Origin</span><span>{{ product.metafields.custom.origin | default: 'Made in Europe' }}</span></div>
+      <div class="detail-row"><span>Care</span><span>{{ product.metafields.custom.care | default: 'Dry clean recommended' }}</span></div>
+    </div>
+  </div>
+</div>
